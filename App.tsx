@@ -12,14 +12,13 @@ import {
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import RootStack from './screens/RootStack';
 
 function App() {
 
   return (
     <NavigationContainer>
-      <View>
-        <Text>Hello!</Text>
-      </View>
+      <RootStack></RootStack>
     </NavigationContainer>
   );
 }
