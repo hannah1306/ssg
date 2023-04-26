@@ -19,10 +19,15 @@ const Tab = createMaterialTopTabNavigator<HomeStackParamList>();
 function HomeStack(){
   return (
     <>
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
-      <Tab.Screen name="Sale" component={SaleScreen}></Tab.Screen>
-      <Tab.Screen name="SSGTV" component={SSGTVScreen}></Tab.Screen>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: {
+          fontSize: 15
+        }
+      }}>
+      <Tab.Screen name="Home" options={{tabBarLabel:'홈'}} component={HomeScreen}></Tab.Screen>
+      <Tab.Screen name="Sale" options={{tabBarLabel:'특가'}} component={SaleScreen}></Tab.Screen>
+      <Tab.Screen name="SSGTV" options={{tabBarLabel:'SSG.TV'}} component={SSGTVScreen}></Tab.Screen>
     </Tab.Navigator>
     <BottomTab></BottomTab>
     </>
