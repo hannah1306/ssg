@@ -1,13 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackNavigationProp } from '../screens/RootStack';
+
 
 function SearchBar(){
+
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  const openSearch = () => {
+    navigation.navigate('Search');
+  }
+
   return (
     <View style={styles.block}>
-      <View style={styles.searchBar}>
+      <Pressable style={styles.searchBar} onPress={openSearch}>
         <Icon name="search1" size={20}></Icon>
-      </View>
+      </Pressable>
       <Icon name="shoppingcart" size={25}></Icon>
     </View>
   )

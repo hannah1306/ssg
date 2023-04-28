@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import HomeStack from './HomeStack';
 import SearchBar from '../components/SearchBar';
 import ButtonSSG from '../components/ButtonSSG';
+import SearchScreen from './SearchScreen';
 
 
 export type RootStackParamList = {
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   Gift: undefined;
   MySSG: undefined;
   ClickProduct: undefined;
+  Search: undefined;
 }
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -46,6 +48,8 @@ function RootStack(){
       <Stack.Screen name="Gift" component={GiftScreen}></Stack.Screen> 
       <Stack.Screen name="MySSG" component={MySSGScreen}></Stack.Screen> 
       <Stack.Screen name="ClickProduct" component={ClickProductScreen}></Stack.Screen> 
+
+      <Stack.Screen name="Search" component={SearchScreen} options={{presentation:'transparentModal'}}></Stack.Screen> 
     </Stack.Navigator>
   )
 }
