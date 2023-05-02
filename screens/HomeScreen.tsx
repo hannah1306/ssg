@@ -1,13 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,View,FlatList,
-  StyleSheet
+  StyleSheet,
+  Image,ScrollView, NativeSyntheticEvent, NativeScrollEvent
 } from 'react-native';
 import Swiper from 'react-native-swiper'
+import ProductComponent from '../components/ProductComponent';
+import LottieView from 'lottie-react-native';
+
+
+const refreshingHeight = 100;
 
 function HomeScreen(){
 
-  const DATA = [
+  const [offsetY, setOffsetY] = useState(0);
+
+  function onScroll(event: NativeSyntheticEvent<NativeScrollEvent>){
+    const { y } = event.nativeEvent.contentOffset;
+    console.log(y);
+    setOffsetY(y);
+  }
+
+  const menuData = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: '쓱배송',
@@ -33,70 +47,152 @@ function HomeScreen(){
       <Text>{title}</Text>
     </View>
   );
-  
+
+  const productData = [
+    {
+      id: 1,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '44,500원',
+      newPrice: '37,855원',
+      percent: '15%'
+    },
+    {
+      id: 2,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '72,500원',
+      newPrice: '50,855원',
+      percent: '22%'
+    },
+    {
+      id: 3,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '33,500원',
+      newPrice: '18,855원',
+      percent: '38%'
+    },
+    {
+      id: 4,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '44,500원',
+      newPrice: '37,855원',
+      percent: '15%'
+    },
+    {
+      id: 5,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '72,500원',
+      newPrice: '50,855원',
+      percent: '22%'
+    },
+    {
+      id: 6,
+      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
+      place: '신세계백화점',
+      oldPrice: '33,500원',
+      newPrice: '18,855원',
+      percent: '38%'
+    },
+  ]
+
+
   return (
     <>
-      {/** 광고 슬라이드 */}
-      <View style={styles.swiper}>
-        <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-        </Swiper>
-      </View>
-      
-      {/** 버튼 */}
-      <FlatList
-        style={styles.btnList}
-        data={DATA}
-        horizontal={true}
-        renderItem={({item}) => <Item title={item.title} />}
-        keyExtractor={item => item.id}
-      />
+
+      <ScrollView contentContainerStyle={styles.block} onScroll={onScroll}>
+
+        {/** 광고 슬라이드 */}
+        <View style={styles.swiper}>
+          <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
+            <View style={styles.slide}>
+              <Image style={styles.slideImage} source={require('../assets/img/slide1.png')}></Image>
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.slideImage} source={require('../assets/img/slide2.png')}></Image>
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.slideImage} source={require('../assets/img/slide3.png')}></Image>
+            </View>
+          </Swiper>
+        </View>
+
+        
+        {/** 버튼 */}
+        <FlatList
+          style={styles.btnList}
+          data={menuData}
+          horizontal={true}
+          renderItem={({item}) => <Item title={item.title} />}
+          keyExtractor={item => item.id}
+        />
+
+        <Text>어린이날 선물대전!</Text>
+        <Text>유아동 쓱세일</Text>
+        
+        <FlatList
+          style={styles.productList}
+          data={productData}
+          renderItem={({item}) => <ProductComponent product={item}/>}
+          horizontal={true}
+        ></FlatList>
+
+      </ScrollView>
+      {/** Refreshing Lottie */}
+      {/* <LottieView
+      style={styles.lottiView}
+      source={require('../assets/lottie/142876-confetti.json')}
+      autoPlay
+      loop
+      /> */}
     </>
   )
 }
 
 const styles = StyleSheet.create({
+  block:{
+    paddingBottom: 100
+  },
+  lottiView: {
+    index:1000,
+    height: refreshingHeight,
+    position: 'absolute',
+    top:0,
+    left:0,
+    right:0,
+  },
   swiper: {
-    height: 200
+    height: 250
   },
   wrapper: {
   },
-  slide1: {
+  slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB'
   },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9'
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
+  slideImage: {
+    flex:1,
+    resizeMode: 'contain'
   },
   btnList: {
-    height:100
+    padding:10,
+    marginTop: 30,
+    marginBottom: 60,
+    borderWidth:1,
   },
   btn: {
     height:60,
     width:60,
     margin: 5,
     backgroundColor: 'orange'
+  },
+  productList: {
+    padding:10,
+    marginTop: 10,
   }
 })
 

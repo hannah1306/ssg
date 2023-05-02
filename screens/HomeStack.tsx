@@ -17,6 +17,7 @@ export type StackNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 const Tab = createMaterialTopTabNavigator<HomeStackParamList>();
 
 function HomeStack(){
+
   return (
     <>
     <Tab.Navigator

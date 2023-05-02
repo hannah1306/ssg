@@ -9,6 +9,8 @@ import HomeStack from './HomeStack';
 import SearchBar from '../components/SearchBar';
 import ButtonSSG from '../components/ButtonSSG';
 import SearchScreen from './SearchScreen';
+import ProductDetailScreen from './ProductDetailScreen';
+import { ProductType } from '../components/ProductComponent';
 
 
 export type RootStackParamList = {
@@ -18,6 +20,7 @@ export type RootStackParamList = {
   MySSG: undefined;
   ClickProduct: undefined;
   Search: undefined;
+  ProductDetail: {product: ProductType} | undefined;
 }
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -45,11 +48,15 @@ function RootStack(){
     <Stack.Navigator>
       <Stack.Screen name="HomeStack" component={HomeStack} options={searchHeader}></Stack.Screen> 
       <Stack.Screen name="Category" component={CategoryScreen}></Stack.Screen> 
-      <Stack.Screen name="Gift" component={GiftScreen}></Stack.Screen> 
+      <Stack.Screen name="Gift" component={GiftScreen} options={searchHeader}></Stack.Screen> 
       <Stack.Screen name="MySSG" component={MySSGScreen}></Stack.Screen> 
       <Stack.Screen name="ClickProduct" component={ClickProductScreen}></Stack.Screen> 
 
-      <Stack.Screen name="Search" component={SearchScreen} options={{presentation:'transparentModal'}}></Stack.Screen> 
+      <Stack.Screen name="Search" 
+        component={SearchScreen} 
+        options={{headerTitle: '', headerRight: () => <SearchBar open={true}/>, presentation:'transparentModal'}}
+      ></Stack.Screen> 
+      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={searchHeader}></Stack.Screen> 
     </Stack.Navigator>
   )
 }
