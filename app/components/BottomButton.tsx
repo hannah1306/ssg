@@ -1,14 +1,9 @@
 import React from 'react';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp, RootStackParamList } from '../screens/RootStack';
+import { ButtonProps, RootStackNavigationProp } from '../types/index';
 import Icon from 'react-native-vector-icons/Feather';
 
-type ButtonProps = {
-  menu: keyof RootStackParamList;
-  text: string;
-  icon: string;
-}
 
 function BottomButton({menu, text, icon}:ButtonProps){
 

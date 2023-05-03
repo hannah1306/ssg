@@ -5,14 +5,7 @@ import HomeScreen from './HomeScreen';
 import BottomTab from '../components/BottomTab';
 import SaleScreen from './SaleScreen';
 import SSGTVScreen from './SSGTVScreen';
-
-type HomeStackParamList = {
-  Home: undefined;
-  Sale: undefined;
-  SSGTV: undefined;
-}
-
-export type StackNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
+import { HomeStackParamList } from '../types';
 
 const Tab = createMaterialTopTabNavigator<HomeStackParamList>();
 

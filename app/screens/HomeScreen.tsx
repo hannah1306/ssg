@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,View,FlatList,
   StyleSheet,
@@ -7,19 +7,32 @@ import {
 import Swiper from 'react-native-swiper'
 import ProductComponent from '../components/ProductComponent';
 import LottieView from 'lottie-react-native';
+import { getProducts } from '../lib/products';
+import { ProductType } from '../types';
 
 
 const refreshingHeight = 100;
 
 function HomeScreen(){
 
-  const [offsetY, setOffsetY] = useState(0);
+  // const [offsetY, setOffsetY] = useState(0);
+  const [productList, setProductList] = useState<ProductType[]>([]);
 
   function onScroll(event: NativeSyntheticEvent<NativeScrollEvent>){
-    const { y } = event.nativeEvent.contentOffset;
-    console.log(y);
-    setOffsetY(y);
+    // const { y } = event.nativeEvent.contentOffset;
+    // console.log(y);
+    // setOffsetY(y);
   }
+
+  useEffect(() => {
+    async function getList() {
+      const data = await getProducts();
+      if(data){
+        setProductList(data);
+      }
+    }
+    getList();
+  }, []);
 
   const menuData = [
     {
@@ -48,58 +61,6 @@ function HomeScreen(){
     </View>
   );
 
-  const productData = [
-    {
-      id: 1,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '44,500원',
-      newPrice: '37,855원',
-      percent: '15%'
-    },
-    {
-      id: 2,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '72,500원',
-      newPrice: '50,855원',
-      percent: '22%'
-    },
-    {
-      id: 3,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '33,500원',
-      newPrice: '18,855원',
-      percent: '38%'
-    },
-    {
-      id: 4,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '44,500원',
-      newPrice: '37,855원',
-      percent: '15%'
-    },
-    {
-      id: 5,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '72,500원',
-      newPrice: '50,855원',
-      percent: '22%'
-    },
-    {
-      id: 6,
-      title: '아디다스오리지널스 (남여공용) 팀코트 [FEADK1302145]',
-      place: '신세계백화점',
-      oldPrice: '33,500원',
-      newPrice: '18,855원',
-      percent: '38%'
-    },
-  ]
-
-
   return (
     <>
 
@@ -109,13 +70,13 @@ function HomeScreen(){
         <View style={styles.swiper}>
           <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
             <View style={styles.slide}>
-              <Image style={styles.slideImage} source={require('../assets/img/slide1.png')}></Image>
+              <Image style={styles.slideImage} source={require('../assets/images/slide1.png')}></Image>
             </View>
             <View style={styles.slide}>
-              <Image style={styles.slideImage} source={require('../assets/img/slide2.png')}></Image>
+              <Image style={styles.slideImage} source={require('../assets/images/slide2.png')}></Image>
             </View>
             <View style={styles.slide}>
-              <Image style={styles.slideImage} source={require('../assets/img/slide3.png')}></Image>
+              <Image style={styles.slideImage} source={require('../assets/images/slide3.png')}></Image>
             </View>
           </Swiper>
         </View>
@@ -135,7 +96,7 @@ function HomeScreen(){
         
         <FlatList
           style={styles.productList}
-          data={productData}
+          data={productList}
           renderItem={({item}) => <ProductComponent product={item}/>}
           horizontal={true}
         ></FlatList>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '../screens/RootStack';
+import { RootStackNavigationProp } from '../types/index';
 import LinearGradient from 'react-native-linear-gradient';
 import BottomButton from './BottomButton';
 

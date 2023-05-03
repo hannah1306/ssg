@@ -1,20 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { RootStackNavigationProp } from '../screens/RootStack';
+import { ProductProps, RootStackNavigationProp } from '../types/index';
 import { useNavigation } from '@react-navigation/native';
-
-export type ProductProps = {
-  product: ProductType;
-}
-
-export type ProductType = {
-  title: string;
-  place: string;
-  oldPrice: string;
-  newPrice: string;
-  percent: string;
-}
 
 function ProductComponent({product}: ProductProps){
 

@@ -4,26 +4,12 @@ import CategoryScreen from './CategoryScreen';
 import MySSGScreen from './MySSGScreen';
 import ClickProductScreen from './ClickProductScreen';
 import GiftScreen from './GiftScreen';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import HomeStack from './HomeStack';
 import SearchBar from '../components/SearchBar';
 import ButtonSSG from '../components/ButtonSSG';
 import SearchScreen from './SearchScreen';
 import ProductDetailScreen from './ProductDetailScreen';
-import { ProductType } from '../components/ProductComponent';
-
-
-export type RootStackParamList = {
-  HomeStack: undefined;
-  Category: undefined;
-  Gift: undefined;
-  MySSG: undefined;
-  ClickProduct: undefined;
-  Search: undefined;
-  ProductDetail: {product: ProductType} | undefined;
-}
-
-export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+import { RootStackParamList } from '../types';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
