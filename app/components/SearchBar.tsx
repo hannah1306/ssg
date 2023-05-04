@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Pressable, TextInput, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '../screens/RootStack';
+import { RootStackNavigationProp } from '../types/index';
 
 
 function SearchBar({open = false}){
@@ -24,6 +24,10 @@ function SearchBar({open = false}){
     }).start();
   }, []);
 
+  const goCart = () => {
+    navigation.navigate('Cart');
+  }
+
   if(open){
     return (
       <View style={styles.block}>
@@ -34,7 +38,9 @@ function SearchBar({open = false}){
           <TextInput autoFocus={true} style={styles.textInput}></TextInput>
           <Icon name="instagram" size={20} style={{marginRight:10}}></Icon>
         </Animated.View>
-        <Icon name="shoppingcart" size={25}></Icon>
+        <Pressable onPress={goCart}>
+          <Icon name="shoppingcart" size={25}></Icon>
+        </Pressable>
       </View>
     )
   }else{
@@ -43,7 +49,9 @@ function SearchBar({open = false}){
         <Pressable style={styles.searchBar} onPress={openSearch}>
           <Icon name="search1" size={20}></Icon>
         </Pressable>
-        <Icon name="shoppingcart" size={25}></Icon>
+        <Pressable onPress={goCart}>
+          <Icon name="shoppingcart" size={25}></Icon>
+        </Pressable>
       </View>
     )
   }

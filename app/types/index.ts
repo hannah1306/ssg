@@ -10,6 +10,7 @@ export type RootStackParamList = {
   ClickProduct: undefined;
   Search: undefined;
   ProductDetail: {product: ProductType} | undefined;
+  Cart: undefined;
 }
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;

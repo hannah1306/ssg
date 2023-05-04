@@ -10,6 +10,7 @@ import ButtonSSG from '../components/ButtonSSG';
 import SearchScreen from './SearchScreen';
 import ProductDetailScreen from './ProductDetailScreen';
 import { RootStackParamList } from '../types';
+import CartScreen from './CartScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -38,11 +39,13 @@ function RootStack(){
       <Stack.Screen name="MySSG" component={MySSGScreen}></Stack.Screen> 
       <Stack.Screen name="ClickProduct" component={ClickProductScreen}></Stack.Screen> 
 
+      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={searchHeader}></Stack.Screen> 
+      <Stack.Screen name="Cart" component={CartScreen}></Stack.Screen> 
       <Stack.Screen name="Search" 
         component={SearchScreen} 
         options={{headerTitle: '', headerRight: () => <SearchBar open={true}/>, presentation:'transparentModal'}}
       ></Stack.Screen> 
-      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={searchHeader}></Stack.Screen> 
+      
     </Stack.Navigator>
   )
 }
